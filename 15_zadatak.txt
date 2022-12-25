@@ -1,0 +1,32 @@
+// Napraviti ispisat vrijednost varijabli preko pokazivaca
+// Zadatak 15
+
+#include<iostream>
+
+using namespace std;
+
+void main()
+{
+	system("color 04");
+	int a, b, c;
+	cout << "Upisite a: ";
+	cin >> a;
+	cout << "Upisite b: ";
+	cin >> b;
+	cout << "Upisite c: ";
+	cin >> c;
+	system("cls");
+
+	int* pok[5];
+	pok[0] = &a;
+	pok[1] = &b;
+	pok[2] = &c;
+
+	system("color 08");
+	cout << "a = " << *pok[0];
+	cout << "\nb = " << *pok[1];
+	cout << "\nc = " << *pok[2];
+
+	
+	system("pause>nul");
+}

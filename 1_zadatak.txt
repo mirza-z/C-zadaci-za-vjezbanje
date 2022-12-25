@@ -1,0 +1,30 @@
+// Citanje sume kvadrata brojeva od 1 do n
+// Rekurzija
+
+
+#include <iostream>
+using namespace std;
+
+int sumaKvadrata(int);
+
+void main()
+{
+	int n;
+	do 
+	{
+		cout << "Unesite n: ";
+		cin >> n;
+	} while (n < 1);
+
+	cout << "Suma je: " << sumaKvadrata(n);
+
+	system("pause>nul");
+}
+
+int sumaKvadrata(int broj)
+{
+	if (broj <= 1) return 1;
+	return broj*broj + sumaKvadrata(broj-1);
+}
+
+// The End

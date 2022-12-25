@@ -1,0 +1,36 @@
+// Samo Bog zna objasnit ovaj zadatak
+// Rekurzija Zadatak 5
+
+
+#include <iostream>
+using namespace std;
+
+int kamata(float, int, int);
+
+void main()
+{
+	int  P, G;
+	float N;
+	do
+	{
+		cout << "Unesite Novac: ";
+		cin >> N;
+		cout << "Unesite postotak P: ";
+		cin >> P;
+		cout << "Unesite godine G: ";
+		cin >> G;
+	} while ((P<0 || P>100));
+	cout << "Vas novac iznosi: " << N+kamata(N, G, P);
+	system("pause>nul");
+}
+
+int kamata(float N,int G, int P)
+{
+	if (G == 0) 
+	{
+		return 0;
+	}
+	else {
+		return N = ((P / 100.) * N + kamata(N, G - 1, P));
+	}
+}

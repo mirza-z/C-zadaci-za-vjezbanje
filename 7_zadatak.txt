@@ -1,0 +1,95 @@
+// 7 elemenata niza i omoguciti unos, ispis i sume
+// Rekurzija Zadatak 6
+
+
+#include <iostream>
+using namespace std;
+
+void arrayInput(int array[][3], int i, int j, int size)
+{
+		if (j == size) 
+		{
+			j = 0;
+			i++;
+			if (i == size) 
+			{
+				return;
+			}
+		}
+		cout << i + 1 << ". red - " << j + 1 << ". kolona: ";
+		cin >> array[i][j];
+		return arrayInput(array, i, j + 1, size);
+}
+
+void arrayOutput(int array[][3], int i, int j, int size)
+{
+	if (j == size)
+	{
+		j = 0;
+		i++;
+		cout << endl;
+		if (i == size)
+		{
+			return;
+		}
+	}
+	if (j == 0) cout << '[';
+	if (j < size - 1) cout << array[i][j] << ", ";
+	else if (j == size-1) cout<<array[i][j] << ']';
+	return arrayOutput(array, i, j + 1, size);
+}
+
+int arraySum(int array[][3], int i, int j, int size)
+{
+	if (j == size)
+	{
+		j = 0;
+		i++;
+		if (i == size)
+		{
+			return 0;
+		}
+	}
+	return array[i][j] + arraySum(array, i, j + 1, size);
+}
+
+int positiveSum(int array[][3], int i, int j, int size)
+{
+	if (j == size)
+	{
+		j = 0;
+		i++;
+		if (i == size)
+		{
+			return 0;
+		}
+	}
+	return (array[i][j]>0) ? (array[i][j] + positiveSum(array, i, j + 1, size)) : positiveSum(array, i, j + 1, size);
+}
+
+int evenIndex(int array[][3], int i, int j, int size)
+{
+	if (j == size)
+	{
+		j = 0;
+		i++;
+		if (i == size)
+		{
+			return 0;
+		}
+	}
+	return (i%2==0 && j%2==0) ? (array[i][j] + evenIndex(array, i, j + 1, size)) : evenIndex(array, i, j + 1, size);
+}
+
+void main()
+{
+	const int size = 3;
+	int array[size][size];
+	arrayInput(array, 0, 0, size);
+	arrayOutput(array, 0, 0, size);
+	cout << "Suma je: " << arraySum(array, 0, 0, size);
+	cout << endl << "Suma pozitivnih je: " << positiveSum(array, 0, 0, size);
+	cout << endl << "Suma brojeva sa parnim indexom je : " << evenIndex(array, 0, 0, size);
+	system("pause>nul");
+}
+

@@ -1,0 +1,90 @@
+// Napraviti strukturu za kompleksni broj i funkcije operacija sa njima
+// Zadatak 11
+
+#include<iostream>
+
+using namespace std;
+
+struct Kompleksni {
+		double re;
+		double im;
+	};
+
+Kompleksni sabiranje(Kompleksni broj1, Kompleksni broj2)
+{
+	Kompleksni broj3 = {broj1.re+broj2.re, broj1.im+broj2.im};
+	return broj3;
+}
+
+Kompleksni oduzimanje(Kompleksni broj1, Kompleksni broj2)
+{
+	Kompleksni broj3 = { broj1.re - broj2.re, broj1.im - broj2.im };
+	return broj3;
+}
+
+Kompleksni mnozenje(Kompleksni broj1, Kompleksni broj2)
+{
+	Kompleksni broj3 = {};
+	broj3.re = broj1.re * broj2.re + (-1) * broj1.im * broj2.im;
+	broj3.im = broj1.im * broj2.re + broj2.im * broj1.re;
+	return broj3;
+}
+
+Kompleksni djeljenje(Kompleksni broj1, Kompleksni broj2)
+{
+	double c = broj2.re * broj2.re + broj2.im * broj2.im;
+	Kompleksni broj3 = {};
+	broj3.re = (broj1.re * broj2.re + broj1.im * broj2.im) / c;
+	broj3.im = (broj1.im * broj2.re - broj1.re * broj2.im) / c;
+	return broj3;
+}
+
+void main()
+{
+	
+	Kompleksni broj1 = {}, broj2 = {};
+	cout << "Unesite realni dio Prvog kompleksnog broja: ";
+	cin >> broj1.re;
+	cout << "Unesite imaginarni dio Prvog kompleksnog broja: ";
+	cin >> broj1.im;
+
+	cout << "Unesite realni dio Drugog kompleksnog broja: ";
+	cin >> broj2.re;
+	cout << "Unesite imaginarni dio Drugog kompleksnog broja: ";
+	cin >> broj2.im;
+
+	cout << endl << "y1 = " << broj1.re << (broj1.im >= 0 ? " + " : " - ") << (broj1.im >= 0 ? broj1.im : -1*broj1.im) <<"i"<<endl;
+	cout << "y2 = " << broj2.re << (broj2.im >= 0 ? " + " : " - ") << (broj2.im >= 0 ? broj2.im : -1 * broj2.im) << "i" << endl;
+	int x = 0;
+	while (x != -1)
+	{
+		
+		cout << endl << "(1) Sabiranje" << endl << "(2) Oduzimanje" << endl << "(3) Mnozenje" << endl << "(4) Dijeljenje" << endl << "(-1) Kraj" << endl << "Vi zelite: ";
+		cin >> x;
+
+		switch (x)
+		{
+			case 1 :
+				cout << "Odabrali ste sabiranje! ";
+				Kompleksni broj3 = sabiranje(broj1, broj2);
+				cout<<"y3 = " << broj3.re << (broj3.im >= 0 ? " + " : " - ") << (broj3.im >= 0 ? broj3.im : -1 * broj3.im) << "i" << endl;
+				break;
+			case 2:
+				cout << "Odabrali ste oduzimanje! ";
+				Kompleksni broj4 = oduzimanje(broj1, broj2);
+				cout << "y3 = " << broj4.re << (broj4.im >= 0 ? " + " : " - ") << (broj4.im >= 0 ? broj4.im : -1 * broj4.im) << "i" << endl;
+				break;
+			case 3:
+				cout << "Odabrali ste mnozenje! ";
+				Kompleksni broj5 = mnozenje(broj1, broj2);
+				cout << "y3 = " << broj5.re << (broj5.im >= 0 ? " + " : " - ") << (broj5.im >= 0 ? broj5.im : -1 * broj5.im) << "i" << endl;
+				break;
+			case 4:
+				cout << "Odabrali ste dijeljenje! ";
+				Kompleksni broj6 = djeljenje(broj1, broj2);
+				cout << "y3 = " << broj6.re << (broj6.im >= 0 ? " + " : " - ") << (broj6.im >= 0 ? broj6.im : -1 * broj6.im) << "i" << endl;
+				break;
+		}
+	}
+	system("pause>nul");
+}

@@ -1,0 +1,57 @@
+// Program za racunanje rjesenja kvadratne jednadzbe
+// Zadatak 17
+
+#include<iostream>
+
+using namespace std;
+
+struct kompleksni {
+	float realni;
+	float imaginarni;
+};
+
+void kvadratna(int, int, int, float*, float*);
+void kvadratna2(int, int, int, kompleksni*, kompleksni*);
+
+void main()
+{
+	system("color 07");
+	
+	int a = 4, b = 4, c = 2;
+	
+
+	int d = pow(b, 2) - 4 * a * c;
+
+	if (d >= 0) 
+	{
+		float x1=0, x2=0;
+		kvadratna(a, b, c, &x1, &x2);
+		cout << "x1 = " << x1 << endl;
+		cout << "x2 = " << x2;
+	}	
+	else
+	{
+		kompleksni komp1, komp2;
+		kvadratna2(a, b, c, &komp1, &komp2);
+		cout << "x1 = " << komp1.realni << " + " << komp1.imaginarni << "i" << endl;
+		cout << "x2 = " << komp2.realni << " + " << komp2.imaginarni << "i" << endl;
+	}
+	system("pause>nul");
+}
+
+void kvadratna(int a, int b, int c, float* x1, float* x2)
+{
+	int d = pow(b, 2) - 4 * a * c;
+	*x1 = float(-b + sqrt(d)) / (2*a);
+	*x2 = float(-b - sqrt(d)) / (2*a);
+}
+
+void kvadratna2(int a, int b, int c, kompleksni* x1, kompleksni* x2)
+{
+	int d = pow(b, 2) - 4 * a * c;
+	d *= -1;
+	x1->realni = float(-b) / (2 * a);
+	x1->imaginarni = float(sqrt(d)) / (2 * a);
+	x2->realni = x1->realni;
+	x2->imaginarni = -1 * x1->imaginarni;
+}

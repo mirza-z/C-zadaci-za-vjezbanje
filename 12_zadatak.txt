@@ -1,0 +1,79 @@
+// Napraviti strukturu za ucenika i baratat s njom
+// Zadatak 12
+
+#include<iostream>
+
+using namespace std;
+
+struct Ucenik {
+	int redniBroj;
+	char prezime[20];
+	char ime[15];
+	int opravdani;
+	int neopravdani;
+};
+
+void ispis(Ucenik ucenik)
+{
+	cout << "Redni broj: " << ucenik.redniBroj<<"\n";
+	cout << "Prezime: " << ucenik.prezime << "\n";
+	cout << "Ime: " << ucenik.ime << "\n";
+	cout << "Opravdani: " << ucenik.opravdani << "\n";
+	cout << "Neopravdani: " << ucenik.neopravdani;
+}
+
+void ukupanBrojIzostanaka(Ucenik ucenici[])
+{
+	int izostanci = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		izostanci += ucenici[i].opravdani + ucenici[i].neopravdani;
+	}
+	cout << "\nUkupno izostanaka: " << izostanci;
+}
+
+void minNeopravdanih(Ucenik ucenici[])
+{
+	int min = ucenici[0].neopravdani, minIndex=0;
+	for (int i = 1; i < 3; i++)
+	{
+		if (min > ucenici[i].neopravdani)
+		{
+			min = ucenici[i].neopravdani;
+			minIndex = i;
+		}
+	}
+	cout << "\n" << ucenici[minIndex].ime << " " << ucenici[minIndex].prezime << " je ucenik sa najmanje neopravdanih: " << ucenici[minIndex].neopravdani;
+}
+
+void maxOpravdanih(Ucenik ucenici[])
+{
+	int max = ucenici[0].opravdani, maxIndex = 0;
+	for (int i = 1; i < 3; i++)
+	{
+		if (max < ucenici[i].neopravdani)
+		{
+			max = ucenici[i].neopravdani;
+			maxIndex = i;
+		}
+	}
+	cout << "\n" << ucenici[maxIndex].ime << " " << ucenici[maxIndex].prezime << " je ucenik sa najvise opravdanih: " << ucenici[maxIndex].opravdani;
+}
+
+void main()
+{
+	Ucenik ucenici[3] = {};
+	ucenici[0] = { 0,"Zaimovic", "Mirza", 40, 5 };
+	ucenici[1] = { 1,"Saturnic", "Titan", 20, 15 };
+	ucenici[2] = { 2,"Jupiterus", "Europa", 12, 12 };
+
+	for (int i = 0; i < 3; i++)
+	{
+		ispis(ucenici[i]);
+		cout << endl << endl;
+	}
+	ukupanBrojIzostanaka(ucenici);
+	minNeopravdanih(ucenici);
+	maxOpravdanih(ucenici);
+	system("pause>nul");
+}

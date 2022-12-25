@@ -1,0 +1,33 @@
+// Isk ne znam ovo objasnit
+// Zadatak 16
+
+#include<iostream>
+
+using namespace std;
+
+void main()
+{
+	system("color 07");
+
+// Deklaracija niza A i dodjela vrijednosti
+	int nizA[99];
+	for (int i = 0; i < 99; i++)
+		nizA[i] = 301 + i;
+
+// Deklaracija niza pokazivaca B i postavljanje adresa na koje ce da pokazuje
+	int* nizB[33];
+	for (int i = 0; i < 33; i++)
+	{
+		nizB[i] = &nizA[i * 3];
+	}
+
+// Ispisivanje niza pokazivaca B
+	for (int i = 0; i < 33; i++)
+	{
+		cout << *nizB[i] << " ";
+		if (i % 10 == 9)
+			cout << endl;
+	}
+	
+	system("pause>nul");
+}

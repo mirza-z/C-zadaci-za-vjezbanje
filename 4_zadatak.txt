@@ -1,0 +1,33 @@
+// Ispisuje Binarni ekvivalent unesenog prirodnog broja n
+// Rekurzija Zadatak 4
+
+
+#include <iostream>
+using namespace std;
+
+int binarni(int, int);
+
+void main()
+{
+	int n, binary = 0;
+	do
+	{
+		cout << "Unesite prirodni broj N: ";
+		cin >> n;
+		
+	} while (n > 0);
+	cout << "Binarni ekvivalent broja N je: " << binarni(n, binary)<<endl;
+	system("pause>nul");
+}
+
+int binarni(int n, int b)
+{
+	if (n == 0)
+	{
+		return b=0;
+	}
+	else
+	{
+		return b = n % 2 + 10 * (binarni(n / 2, b));
+	}
+}

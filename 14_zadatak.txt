@@ -1,0 +1,73 @@
+// Napraviti strukturu za ucenike i naci ucenika sa najgorim prosjekom
+// Zadatak 14
+
+#include<iostream>
+
+using namespace std;
+
+struct Ucenik
+{
+	int redniBroj;
+	char prezime[20];
+	char ime[15];
+	float prosjecnaOcjena;
+};
+
+void unos(Ucenik* ucenici, int n)
+{
+	
+	for (int i = 0; i < n; i++) 
+	{
+		cout << "Unesite ucenika " << i + 1 << "\n";
+		cout << "Redni Broj: ";
+		cin >> ucenici[i].redniBroj;
+		cout << "Ime: ";
+		cin >> ucenici[i].ime;
+		cout << "Prezime: ";
+		cin >> ucenici[i].prezime;
+		cout << "Prosjecna Ocjena: ";
+		cin >> ucenici[i].prosjecnaOcjena;
+		cout << "\nPritisnite bilo koju tipku da nastavite dalje!";
+		system("pause>nul");
+		system("cls");
+	}
+}
+
+Ucenik* najgori(Ucenik* ucenici, int n)
+{
+	int temp = 0;
+	float minProsjek = ucenici[0].prosjecnaOcjena;
+	for (int i = 1; i < n; i++)
+	{
+		if (minProsjek > ucenici[i].prosjecnaOcjena)
+		{
+			minProsjek = ucenici[i].prosjecnaOcjena;
+			temp = i;
+		}
+	}
+	return &ucenici[temp];
+}
+
+void ispis(Ucenik ucenici)
+{
+		cout << "\nRedni Broj: "<< ucenici.redniBroj;
+		cout << "\nIme: "<< ucenici.ime;
+		cout << "\nPrezime: "<< ucenici.prezime;
+		cout << "\nProsjecna Ocjena: "<< ucenici.prosjecnaOcjena;
+		cout << "\nPritisnite bilo koju tipku da nastavite dalje!";
+		system("pause>nul");
+		system("cls");
+}
+
+void main()
+{
+	const int x = 3;
+	Ucenik ucenici[x];
+	
+	unos(ucenici, x);
+	for(int i=0; i<x; i++)
+	ispis(ucenici[i]);
+	Ucenik * najgoriUcenik = najgori(ucenici, x);
+	cout << "Najgori ucenik je : " << najgoriUcenik->ime<< " "<< najgoriUcenik->prezime;
+	system("pause>nul");
+}

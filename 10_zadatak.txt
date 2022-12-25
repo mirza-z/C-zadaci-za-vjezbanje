@@ -1,0 +1,27 @@
+// Napraviti najlaksu mogucu strukturu
+// Zadatak 10
+
+#include<iostream>
+#include<cstdlib>
+
+using namespace std;
+
+void main()
+{
+	struct Kruznica
+	{
+		float x;
+		float y;
+		float polumjer;
+	};
+
+	Kruznica k1 = { 5, 5};
+	cout << "Unesite polumjer prve kruznice: ";
+	cin >> k1.polumjer;
+	Kruznica k2 = { -5, 5, k1.polumjer }, k3 = { -5, -5, k2.polumjer * 2 }, k4 = { 5,-5, k2.polumjer + k3.polumjer };
+	cout << "Kruznica k1 ima x: " << k1.x << " i y: " << k1.y << " koordinatu, polumjera: " << k1.polumjer << endl;
+	cout << "Kruznica k2 ima x: " << k2.x << " i y: " << k2.y << " koordinatu, polumjera: " << k2.polumjer << endl;
+	cout << "Kruznica k3 ima x: " << k3.x << " i y: " << k3.y << " koordinatu, polumjera: " << k3.polumjer << endl;
+	cout << "Kruznica k4 ima x: " << k4.x << " i y: " << k4.y << " koordinatu, polumjera: " << k4.polumjer << endl;
+	system("pause>nul");
+}

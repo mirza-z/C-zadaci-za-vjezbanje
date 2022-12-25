@@ -1,0 +1,115 @@
+// Napisati matricu 4*4 i provjeriti da li je ona magicni kvadrat?
+// Zadatak 9
+
+#include<iostream>
+#include<cstdlib>
+
+using namespace std;
+
+void initArray(int** arr, int m, int n, int val)
+{
+    if (m == 0 || n == 0)
+        return;
+
+    // Initialize the first row
+    for (int j = 0; j < n; j++)
+        arr[0][j] = val;
+
+    // Recurse on the remaining rows
+    initArray(arr + 1, m - 1, n, val);
+}
+
+void outputArray(int** arr, int m, int n)
+{
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+            cout << arr[i][j] << " ";
+        cout << endl;
+    }
+}
+
+bool isMagicalSquare(int** arr, int n)
+{
+    //dijagonale
+    int glavnaD = 0, sporednaD = 0, red[4] ={0}, kolona[4]= {0}, temp=0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (i == j) 
+            {
+                glavnaD += arr[i][j];
+            }
+            if (i == n - 1 - j)
+            {
+                sporednaD += arr[i][n - 1 - j];
+            }
+        }
+    }
+
+    //redovi
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            temp += arr[i][j];
+        }
+        red[i] = temp;
+        temp = 0;
+    }
+
+    //kolone
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            temp += arr[j][i];
+        }
+        kolona[i] = temp;
+        temp = 0;
+    }
+
+    //provjera
+    for (int i = 0; i < n-1; i++)
+    {
+        if (red[i] != red[i + 1] || kolona[i] != kolona[i + 1])
+            return false;
+    }
+
+    cout << "Suma glD: " << glavnaD << endl << "Suma spD: " << sporednaD << endl << "Suma redova: " << red[0] << endl << "Suma kolona: " << kolona[0];
+    if (sporednaD == glavnaD && kolona[0]==red[0] && red[0]==glavnaD)return true;
+    else return false;
+}
+
+void main()
+{
+
+    int n = 4;
+
+    // Create the array as described in the previous examples
+    int** arr = new int* [n];
+    for (int i = 0; i < n; i++)
+        arr[i] = new int[n];
+
+    // Initialize the array
+    initArray(arr, n, n, 0);
+
+    outputArray(arr, n, n);
+
+    if (isMagicalSquare(arr, n)) 
+    {
+        cout <<endl<< "Magicni kvadratic!!";
+    }
+    else
+    {
+        cout << endl << "Nije magicni kvadratic!!";
+    }
+
+
+    // Don't forget to delete the arrays when you're done
+    for (int i = 0; i < n; i++)
+        delete[] arr[i];
+    delete[] arr;
+	system("pause>nul");
+}

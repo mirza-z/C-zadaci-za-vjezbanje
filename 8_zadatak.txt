@@ -1,0 +1,99 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+void inputArray(int** arr, int m, int n)
+{
+    if (m == 0 || n == 0)
+        return;
+
+    // Read the first row
+    cout << "Unesite "<<n<<" clana reda: ";
+    for (int j = 0; j < n; j++) 
+    {
+        
+        cin >> arr[0][j];
+    }
+        
+
+    // Recurse on the remaining rows
+    inputArray(arr + 1, m - 1, n);
+}
+
+void outputArray(int** arr, int m, int n)
+{
+    if (m == 0 || n == 0)
+        return;
+
+    // Print the first row
+    for (int j = 0; j < n; j++)
+        cout << arr[0][j] << " ";
+    cout << endl;
+
+    // Recurse on the remaining rows
+    outputArray(arr + 1, m - 1, n);
+}
+
+int sumaGlavneDijagonale(int** arr, int m, int n) 
+{
+    if (m == 0 || n == 0)
+        return 0;
+    else
+        return arr[m-1][n-1] + sumaGlavneDijagonale(arr, m -1, n - 1);
+}
+
+int sumaSporedneDijagonale(int** arr, int m, int n)
+{
+    if (n == 0)
+        return 0;
+    else
+        return arr[m][n - 1] + sumaSporedneDijagonale(arr, m + 1, n - 1);
+}
+
+int najveciURedu(int* arr, int n) 
+{
+    if (n == 1)
+        return arr[0];
+
+    // Find the maximum of the first element and the remaining elements
+    int maxRemaining = najveciURedu(arr + 1, n - 1);
+    return max(arr[0], maxRemaining);
+}
+
+int najveciUKoloni(int** arr, int m, int n, int col)
+{
+    int maxVal = arr[0][col];
+    for (int i = 1; i < m; i++)
+    {
+        if (arr[i][col] > maxVal)
+            maxVal = arr[i][col];
+    }
+    return maxVal;
+}
+
+int main()
+{
+    int m = 3, n = 3;
+    int x = 0;
+
+    // Create the array as described in the previous examples
+    int** arr = new int* [m];
+    for (int i = 0; i < m; i++)
+        arr[i] = new int[n];
+
+    // Read the array elements
+    inputArray(arr, m, n);
+    outputArray(arr, m, n);
+    cout << "Suma clanova glavne dijagonale je: " << sumaGlavneDijagonale(arr, m, n);
+    cout << endl << "Suma clanova sporedne dijagonale je: " << sumaSporedneDijagonale(arr, 0, n);
+    cout << endl << "Najveci element u " << x + 1 << ". redu je: " << najveciURedu(arr[x], n);
+    cout << endl << "Najveci element u " << x + 1 << ". koloni je: " << najveciUKoloni(arr, m, n, x);
+    
+    // Don't forget to delete the arrays when you're done
+    for (int i = 0; i < m; i++)
+        delete[] arr[i];
+    delete[] arr;
+
+    return 0;
+}

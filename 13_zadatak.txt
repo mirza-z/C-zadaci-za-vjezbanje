@@ -1,0 +1,129 @@
+// Napraviti strukturu za nezaposlene
+// Zadatak 13
+
+#include<iostream>
+
+using namespace std;
+
+enum spol { musko, zensko };
+
+struct Nezaposleni {
+	char ime[15];
+	char prezime[20];
+	spol sp;
+	int godinaRodjenja;
+	float godineStaza;
+};
+
+void unos(Nezaposleni &osoba)
+{
+	int y;
+	cout << "Ime: ";
+	cin >> osoba.ime;
+	cout << "Prezime: ";
+	cin >> osoba.prezime;
+	cout << "Spol (0=muski/1=zenski): ";
+	cin >> y;
+	if (y == 0)
+		osoba.sp = musko;
+	else
+		osoba.sp = zensko;
+	cout << "Godina rodjenja: ";
+	cin >> osoba.godinaRodjenja;
+	cout << "Godine staza: ";
+	cin >> osoba.godineStaza;
+}
+
+void ispis(Nezaposleni osoba)
+{
+	cout << "\nIme: "<<osoba.ime<<endl;
+	cout << "Prezime: " << osoba.prezime << endl;
+	cout << "Spol: " << (osoba.sp == musko ? " musko" : "zensko") << endl;
+	cout << "Godina rodjenja: " << osoba.godinaRodjenja << endl;
+	cout << "Godine staza: " << osoba.godineStaza << endl;
+}
+
+void xStaz(Nezaposleni osobe[], int n) 
+{
+	system("cls");
+	int god;
+	cout << "Unesite godine staza: ";
+	cin >> god;
+	cout << "Osobe se vise od " << god << " godina staza su: "<<endl;
+	for (int i = 0; i < n; i++) {
+		if (osobe[i].godineStaza >= god)
+			ispis(osobe[i]);
+	}
+	cout << "Pritisnite bilo koje dugne za nastavak!";
+	system("pause>nul");
+	system("cls");
+}
+
+void zenskeOsobe(Nezaposleni osobe[], int n)
+{
+	system("cls");
+	cout << "Zenske nezaposlene osobe su:\n";
+	for (int i = 0; i < n; i++)
+	{
+		if(osobe[i].sp==zensko)
+			ispis(osobe[i]);
+	}
+	cout << "Pritisnite bilo koje dugne za nastavak!";
+	system("pause>nul");
+	system("cls");
+}
+
+void main()
+{
+	Nezaposleni osobe[10] = {};
+	int x=0, brojOsoba = 0;
+	do {
+		cout << "Za kraj unesite (-1)\n";
+		cout << "Za ciscenje ekrana unesite (-2)\n";
+		cout << "Za unos nezaposlene osobe unesite broj (1)\n";
+		cout << "Za ispis nezaposlenih osoba unesite broj (2)\n";
+		cout << "Za ispis nezaposlenih osoba koje imaju vise od X godina staza (3)\n";
+		cout << "Za ispis zenskih nezaposlenih osoba unesite (4)\n";
+		cout << "Vi zelite: ";
+		cin >> x;
+		switch (x)
+		{
+		case -1:
+			cout << "Kraj!";
+			break;
+		case -2:
+			cout << "Pritisnite bilo koju tipku da ocistite ekran!";
+			system("pause>nul");
+			system("cls");
+			break;
+		case 1:
+			unos(osobe[brojOsoba]);
+			brojOsoba++;
+			break;
+
+		case 2:
+			system("cls");
+			for (int i = 0; i < brojOsoba; i++)
+			{
+				ispis(osobe[i]);
+			}
+			cout << "Pritisnite bilo koje dugne za nastavak!";
+			system("pause>nul");
+			system("cls");
+			break;
+		case 3:
+			xStaz(osobe, brojOsoba);
+			break;
+		case 4:
+			zenskeOsobe(osobe, brojOsoba);
+			break;
+		default:
+			std::cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Pogresan unos!\n";
+			break;
+		}
+	} while (x != -1 && brojOsoba < 10);
+
+	system("pause>nul");
+}

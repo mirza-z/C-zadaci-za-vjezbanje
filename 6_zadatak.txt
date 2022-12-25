@@ -1,0 +1,70 @@
+// 7 elemenata niza i omoguciti unos, ispis i sume
+// Rekurzija Zadatak 6
+
+
+#include <iostream>
+using namespace std;
+
+void arrayInput(int array[], int i, int size)
+{
+	if (i == size) {
+		return;
+	}
+	else {
+		cout << "Unesite " << i+1 << ". clan niza: ";
+		cin >> array[i];
+		return arrayInput(array, i + 1, size);
+	}
+}
+
+void arrayOutput(int array[], int i, int size)
+{
+	if (i == size)
+		return;
+	else {
+		if (i == 0) cout << "[";
+		if (i < size - 1) cout << array[i] << ", ";
+		else cout << array[i];
+		if (i == size-1) cout << "]";
+
+		return arrayOutput(array, i + 1, size);
+	}
+}
+
+int arraySum(int array[], int i, int size)
+{
+	if (i == size) return 0;
+	else return array[i] + arraySum(array, i + 1, size);
+}
+
+int positiveSum(int array[], int i, int size)
+{
+	if (i == size)
+		return 0;
+	else
+	{
+		return (array[i] > 0) ? array[i] + positiveSum(array, i + 1, size) : positiveSum(array, i + 1, size);
+	}
+}
+
+int evenIndexSum(int array[], int i, int size)
+{
+	if (i == size)
+		return 0;
+	else
+	{
+		return (array[i] %2 == 0) ? array[i] + positiveSum(array, i + 1, size) : positiveSum(array, i + 1, size);
+	}
+}
+
+void main()
+{
+	const int size = 7;
+	int array[size];
+	arrayInput(array, 0, size);
+	arrayOutput(array, 0, size);
+	cout << endl << "Suma svih clanova je " << arraySum(array, 0, size);
+	cout << endl << "Suma  svih pozitivnih clanova je: " << positiveSum(array, 0, size);
+	cout << endl << "Suma  clanova sa parnim indexom je: " << evenIndexSum(array, 0, size);
+	system("pause>nul");
+}
